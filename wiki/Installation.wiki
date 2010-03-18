@@ -1,7 +1,7 @@
 #summary Installation and configuration
 #labels Phase-Deploy
 
-= Introduction =
+= Installation and configuration =
 
 Just add these lines when registring the Twig Autoloader function:
 
