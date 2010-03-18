@@ -23,9 +23,61 @@ The short alias for ´gettext´ is also allowed:
 {% _("Hello World!") %}
 }}}
 
-All Gettext-Twig tags allows sprintf-style parameters. For example:
+All Gettext-Twig tags allows printf-style parameters. For example:
 
 {{{
 {% gettext ("Welcome back, %s!") user.name %}
 }}}
-Would print in spanish "Hola otra vez, Ana" when user.name is "Ana".
+Would print in spanish "Hola otra vez, Ana" when `user.name` is "Ana".
+
+== ngettext ==
+`ngettext` tag is the plural form of `gettext`.
+
+{{{
+{% ngettext (<message_singular>, <message_plural>, <count>) [<parameter> {, <parameter> }] %}
+}}}
+
+Next sample will print "There are 5 users" in the current locale and in the correct locale plural form, when users.count is 5.
+
+{{{
+{% ngettext ("There is one user", "There are %d users", users.count) users.count %}
+}}}
+
+== dgettext ==
+`dgettext` tag does the same as ´gettext´ but overriding the current domain.
+
+{{{
+{% dgettext (<domain>, <message>) [<parameter> {, <parameter> }] %}
+}}}
+
+== dngettext ==
+`dngettext` tag is the plural form of `dgettext`.
+
+{{{
+{% dngettext (<domain>, <message>, <count>) [<parameter> {, <parameter> }] %}
+}}}
+
+== dcgettext ==
+`dcgettext` tag does the same as ´dgettext´ but overriding the category.
+
+{{{
+{% dcgettext (<domain>, <message>, <category>) [<parameter> {, <parameter> }] %}
+}}}
+
+_category_ is one of the following values:
+
+ * LC_ALL for all of the below
+ * LC_COLLATE for string comparison, see [http://www.php.net/manual/en/function.strcoll.php strcoll()]
+ * LC_CTYPE for character classification and conversion, for example [http://www.php.net/manual/en/function.strtoupper.php strtoupper()]
+ * LC_MONETARY for [http://www.php.net/manual/en/function.localeconv.php localeconv()]
+ * LC_NUMERIC for decimal separator (See also [http://www.php.net/manual/en/function.localeconv.php localeconv()])
+ * LC_TIME for date and time formatting with [http://www.php.net/manual/en/function.strftime.php strftime()]
+ * LC_MESSAGES for system responses (available if PHP was compiled with libintl)
+
+
+== dcngettext ==
+`dcngettext` tag is the plural form of `dcgettext`.
+
+{{{
+{% dngettext (<domain>, <message_singular>, <message_plural>, <count>, <category>) [<parameter> {, <parameter> }] %}
+}}}
