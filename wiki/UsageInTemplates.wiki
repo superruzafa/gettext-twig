@@ -1,0 +1,31 @@
+#summary Usage of Gettext-Twig in templates.
+
+= Usage in templates =
+
+Gettext-Twig provides a set of tags corresponding to each PHP gettext available function.
+
+== gettext ==
+`gettext` tag looks for a message in the current domain.
+
+{{{
+{% gettext (<message>) [<parameter> {, <parameter> }] %}
+}}}
+
+Next sample will print "Hello World!" in the current locale.
+
+{{{
+{% gettext ("Hello World!") %}
+}}}
+
+The short alias for ´gettext´ is also allowed:
+
+{{{
+{% _("Hello World!") %}
+}}}
+
+All Gettext-Twig tags allows sprintf-style parameters. For example:
+
+{{{
+{% gettext ("Welcome back, %s!") user.name %}
+}}}
+Would print in spanish "Hola otra vez, Ana" when user.name is "Ana".
