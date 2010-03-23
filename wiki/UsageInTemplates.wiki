@@ -30,6 +30,19 @@ All Gettext-Twig tags allows printf-style parameters. For example:
 }}}
 Would print in spanish "Hola otra vez, Ana" when `user.name` is "Ana".
 
+Some modifications must be done when `gettext` is used within HTML attributes due these are externally quoted and xgettext will ignore internal quoted strings:
+
+{{{
+<input type="submit" name="save_preferences" value="{% _("Save preferences") %}" />
+}}}
+
+`xgettext` wont extract _Save preferences_ due (as parsing as C code) the string would be "{% _)", since the first quote have precedence over the second.
+To solve this you can escape the quote with Twig:
+
+{{{
+<input type="submit" name="preferences" value={{ '"' }}{% _("Save preferences") %}" />
+}}}
+
 == ngettext ==
 `ngettext` tag is the plural form of `gettext`.
 
